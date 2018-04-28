@@ -19,4 +19,5 @@ for mat in smat[0:-1]:
     if '%' in mat:
         dmat.append([])
     else:
-        dmat[-1].append(mat)
+        dmat[-1].append(mat.split(','))
+del smat
