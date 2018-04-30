@@ -5,14 +5,14 @@ Created on Mon Apr 30 08:34:32 2018
 
 @author: almaan
 """
-def normalize(rmsd):
-    m = np.mean(rmsd)
-    std = np.std(rmsd)
-    return (rmsd-m)/std
+
 
 import numpy as np
-path = '/data/PepBind/4rjd/4rjd_noligand_temp/438/sims/rmsd/avermsd.xvg'
-output = '/data/PepBind/4rjd/4rjd_noligand_temp/438/sims/rmsd/adjrmsd'
+#path = '/data/PepBind/4rjd/4rjd_noligand_temp/438/sims/rmsd/avermsd.xvg'
+#output = '/data/PepBind/4rjd/4rjd_noligand_temp/438/sims/rmsd/avermsd'
+path = '/data/PepBind/4rjd/4rjd_noligand/sims/rmsd/rmsd.xvg'
+output = '/data/PepBind/4rjd/4rjd_noligand/sims/rmsd/avermsd'
+
 with open(path,'r+') as fopen:
     frames,rmsd = [],[]
     lines = []
@@ -26,15 +26,15 @@ fopen.close()
 joint = np.array(zip(frames,rmsd))
 frames = np.array(frames)
 rmsd = np.array(rmsd)
-rmsd_av = normalize(rmsd)
-joint = np.array(zip(frames,rmsd_av))
+#rmsd_av = normalize(rmsd)
+joint = np.array(zip(frames,rmsd))
 
 #import matplotlib.pyplot as plt
 #plt.plot(frames,rmsd_av)
 #plt.plot(frames,rmsd)
 
 with open(output + '.csv','w+') as fopen:
-    for r,f in zip(rmsd_av,frames):
+    for r,f in zip(rmsd,frames):
         fopen.write(','.join([str(f),str(r)]) + '\n')
 fopen.close()
 
