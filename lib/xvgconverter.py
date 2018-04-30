@@ -28,3 +28,4 @@ def xvg_convert(path,output):
     fopen.close()
     
     np.save(output + '.npy',joint)
+    return joint

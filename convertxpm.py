@@ -87,14 +87,16 @@ def save_matrix_npy(mat,output):
     nmat = np.array(mat)
     np.save(output,nmat)
 
-prs = arp.ArgumentParser()
-prs.add_argument('-f','--filename',help='Name of xpm-file',required=True)
-prs.add_argument('-c','--csvname',help='Name of output csv-file',default='',type=str)
-prs.add_argument('-n','--npyname',help='Name of output numpy-file',default='',type=str)
-prs.add_argument('-v','--verbose',help='Verbose',action='store_true', default=False)
-arg = prs.parse_args()
-
 if __name__ == '__main__':
+
+	prs = arp.ArgumentParser()
+	prs.add_argument('-f','--filename',help='Name of xpm-file',required=True)
+	prs.add_argument('-c','--csvname',help='Name of output csv-file',default='',type=str)
+	prs.add_argument('-n','--npyname',help='Name of output numpy-file',default='',type=str)
+	prs.add_argument('-v','--verbose',help='Verbose',action='store_true', default=False)
+	arg = prs.parse_args()
+
+
     dmat = generate_frame_matrix(arg.filename)
     if arg.csvname:
         save_matrix_csv(dmat,arg.csvname)
