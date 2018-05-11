@@ -12,6 +12,7 @@ of time-series and saving the data in different formats have been done.
 """
 
 import argparse as arp
+import numpy as np
 
 
 def mat_series(filename):
@@ -54,6 +55,8 @@ def extract_dmat(xpm):
         j = unquote(i)
         z = [float(colors[j[k:k+nb]]) for k in range(0,nx,nb)]
         dmat.append(z)
+    
+    dmat = np.array(dmat)
     return dmat
 
 def generate_frame_matrix(filename):
@@ -61,7 +64,7 @@ def generate_frame_matrix(filename):
     dframes = []
     for frame in frames:
         dframes.append(extract_dmat(frame))
-    return dframes
+    return np.array(dframes)
 
 
 def save_matrix_csv(mat,output):

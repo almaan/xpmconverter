@@ -18,7 +18,7 @@ def correlate(rm,dm,rf):
     mrm = (rm-np.mean(rm))**2
     for ii in xrange(dm.shape[1]):
         for jj in xrange(dm.shape[2]):
-                if ii <= jj:
+                if ii < jj:
                     mdm = (dm[:,ii,jj]-np.mean(dm[:,ii,jj]))**2
                     corr_mat[ii,jj] = np.sum(np.sqrt(mdm*mrm)/rf[ii]/rf[jj])
                     corr_mat[jj,ii] = corr_mat[ii,jj]
@@ -29,13 +29,16 @@ def quick_correlate(rm,dm,rf,N):
     mrm = (rm-np.mean(rm))**2
     for ii in xrange(dm.shape[1]):
         for jj in xrange(dm.shape[2]):
-                if ii <= jj:
+                if ii < jj:
                     srt = np.argsort(top_val[:,0])
                     top_val = top_val[srt,:]
                     mdm = (dm[:,ii,jj]-np.mean(dm[:,ii,jj]))**2
                     sig = np.sum(np.sqrt(mdm*mrm)/rf[ii]/rf[jj])            
                     if sig >= top_val[0,0]:
                         top_val[0,:] = sig,ii,jj
+                        
+    srt = np.argsort(top_val[:,0])
+    top_val = top_val[srt,:]
     return top_val
 
 def save_corr_top(pth_out,res1,res2):
